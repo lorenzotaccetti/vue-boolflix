@@ -32,7 +32,7 @@ export default {
         }
       })
       .then((response) => {
-        console.log(response.data.results)
+        console.log(response.data.results[0].title)
       });
     },
 
