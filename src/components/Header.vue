@@ -19,10 +19,11 @@ export default {
 
 <style scoped lang="scss">
 header{
-    padding: 40px;
-    background-color: rgba(191, 182, 182, 0.831);
+    height: 100px;
+    line-height: 100px;
 
     input{
+        margin-left: 30px;
         margin-right: 30px;
         padding: 5px 20px;
         min-width: 250px;

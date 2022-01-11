@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @searchClicked="searchClicked" />
-    <Main />
+    <Main :details="researchArray" />
   </div>
 </template>
 
@@ -19,6 +19,7 @@ export default {
   data: function(){
     return {
       researchText: '',
+      researchArray: [],
     }
   },
   methods: {
@@ -32,7 +33,7 @@ export default {
         }
       })
       .then((response) => {
-        console.log(response.data.results[0].title)
+        this.researchArray = [ ...response.data.results];
       });
     },
 
