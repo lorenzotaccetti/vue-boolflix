@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @searchClicked="searchClicked" />
-    <Main :details="researchArray" />
+    <Main :details="researchArray" :text="researchText" />
   </div>
 </template>
 
