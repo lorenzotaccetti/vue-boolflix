@@ -2,13 +2,16 @@
     <main>
         <div>
             <h2>Risultati della ricerca per: {{text}}</h2>
-            <div class="container">
+            <div v-if="details.length > 0" class="container">
                 <ul class="single-card" v-for="(element, index) in details" :key="index">
                     <li>Titolo: {{element.title}}</li>
                     <li>Titolo originale: {{element.original_title}}</li>
                     <li>Lingua: {{element.original_language}}</li>
                     <li>Voto: {{element.vote_average}}</li>
                 </ul>
+            </div>
+            <div v-else class="no-result">
+                <h3>Nessun risultato</h3>
             </div>
         </div>
     </main>
@@ -31,7 +34,7 @@ main{
     height: calc(100% - 100px);
 
     h2{
-        margin: 30px;
+        padding: 30px;
     }
     
     .container{
@@ -55,6 +58,13 @@ main{
                 font-size: 20px;
             }
         }
+    }
+
+    .no-result{
+        font-size: 40px;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
     }
 }
 </style>
