@@ -37,7 +37,7 @@ export default {
     props: {
         movies : Array,
         tvseries: Array,
-        text : String
+        text : String,
     },
 }
 </script>

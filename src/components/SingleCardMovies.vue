@@ -7,107 +7,20 @@
         <li>
             Titolo originale: {{element.original_title}}
         </li>
-        <li>
-            Lingua: 
-            <img 
-            class="flag" 
-            :src="require('../assets/img/' + flagArray[currentActiveFlag].flag)" 
-            :alt="flagArray[currentActiveFlag].lang"> 
-        </li>
-        <li>
-            Voto:
-            <i 
-            v-for="(element, index) in (0 + vote)" 
-            :key="index" 
-            class="fas fa-star">
-            </i>
-            <i 
-            v-for="(element, index) in (5 - vote)" 
-            :key="index" 
-            class="far fa-star">
-            </i>
-        </li>
-        <li>
-            <img 
-            :src="urlImages + element.poster_path" 
-            :alt="element.original_title">
-        </li>
+        <SingleCard :element="element"/>
     </ul>
 </template>
 
 <script>
+import SingleCard from './SingleCard.vue'
     export default {
-        name: 'SingleCard',
+        name: 'SingleCardMovies',
         props: {
-            element: Object
+            element: Object,
         },
-        data: function(){
-            return{
-                vote: null,
-                urlImages: 'https://image.tmdb.org/t/p/w342', 
-                currentActiveFlag: null,
-                flagArray: [
-                    {
-                        lang: 'it',
-                        flag: 'ita.png'
-                    },
-                    {
-                        lang: 'en',
-                        flag: 'uk.png'
-                    },
-                    {
-                        lang: 'es',
-                        flag: 'spn.png'
-                    },
-                    {
-                        lang: 'fr',
-                        flag: 'frc.png'
-                    },
-                    {
-                        lang: 'none',
-                        flag: 'terra.png'
-                    },
-                ]
-            }
+        components:{
+            SingleCard
         },
-        methods: {
-        },
-        created: function (){
-
-            // Funzione per determinare quale bandiera mettere per la lingua
-            if (this.element.original_language === 'it'){
-                this.currentActiveFlag = 0;
-            } else if (this.element.original_language === 'en'){
-                this.currentActiveFlag = 1
-            } else if (this.element.original_language === 'es'){
-                this.currentActiveFlag = 2
-            } else if (this.element.original_language === 'fr'){
-                this.currentActiveFlag = 3
-            } else {
-                this.currentActiveFlag = 4
-            };
-
-            // Funzione per determinare il voto tramite stelle
-            if(this.element.vote_average > 8.5){
-                this.vote = 5
-            } else if (this.element.vote_average > 6.5) {
-                this.vote = 4
-            } else if (this.element.vote_average > 4.5) {
-                this.vote = 3
-            } else if (this.element.vote_average > 2.5) {
-                this.vote = 2
-            } else if (this.element.vote_average > 0) {
-                this.vote = 1
-            } else{
-                this.vote = null
-            };
-
-            // Funzione per impostare un'immagine di base anche a tutti film e serie tv che non hanno copertina
-            if(this.element.poster_path === null){
-                this.urlImages = 'https://www.publicdomainpictures.net'
-                this.element.poster_path = '/pictures/280000/velka/not-found-image-15383864787lu.jpg'
-            }
-        }
     }
 </script>
 
