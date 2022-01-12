@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @searchClicked="searchClicked" />
-    <Main :details="researchArray" :text="researchText" />
+    <Main :movies="moviesArray" :tvseries="tvSeriesArray" :text="researchText" />
   </div>
 </template>
 
@@ -19,13 +19,16 @@ export default {
   data: function(){
     return {
       researchText: '',
-      researchArray: [],
+      moviesArray: [],
+      tvSeriesArray: [],
     }
   },
   methods: {
     searchClicked: function(element){
-      this.researchText = element
+      // Collego il dato dell'input al data in App
+      this.researchText = element;
       
+      // Chiamata all'API per i film
       axios.get('https://api.themoviedb.org/3/search/movie', {
         params: {
           api_key: 'eb32925ee4340f32b75ef0f48a3de4d6',
@@ -33,7 +36,18 @@ export default {
         }
       })
       .then((response) => {
-        this.researchArray = [ ...response.data.results];
+        // Riempio l'array nei data con le informazioni date dall'API
+        this.moviesArray = response.data.results;
+      });
+
+      // Chiamata all'API per le serie tv
+      axios.get('https://api.themoviedb.org/3/search/tv',{
+        params: {
+          api_key: 'eb32925ee4340f32b75ef0f48a3de4d6',
+          query: this.researchText
+        }
+      }).then((response) => {
+        this.tvSeriesArray = response.data.results
       });
     },
 
@@ -42,6 +56,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 *{
   margin: 0;
   padding: 0;
