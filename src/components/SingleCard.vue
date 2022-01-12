@@ -86,6 +86,8 @@
             },
             starVote: function(){
 
+                // Funzione per trasformare il voto in decimali in voto in stelle
+                
                 let vote = null;
 
                 if(this.element.vote_average > 8.5){
@@ -108,7 +110,7 @@
                 return vote;
             },
             notFoundImage: function(){
-                
+
                 // Funzione per impostare un'immagine di base anche a tutti film e serie tv che non hanno copertina
 
                 let replaceImage = this.element.poster_path;
