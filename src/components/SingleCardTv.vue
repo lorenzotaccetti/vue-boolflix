@@ -101,6 +101,12 @@
             } else{
                 this.vote = null
             }
+
+            // Funzione per impostare un'immagine di base anche a tutti film e serie tv che non hanno copertina
+            if(this.element.poster_path === null){
+                this.urlImages = 'https://www.publicdomainpictures.net'
+                this.element.poster_path = '/pictures/280000/velka/not-found-image-15383864787lu.jpg'
+            }
         }
     }
 </script>
