@@ -1,11 +1,37 @@
 <template>
-     <!-- Single Card -->
+    <!-- Single Card -->
     <ul class="single-card">        
-        <li>Titolo: {{element.name}}</li>
-        <li>Titolo originale: {{element.original_name}}</li>
-        <li>Lingua: <img :src="require('../assets/img/' + flagArray[currentActiveFlag].flag)" :alt="flagArray[currentActiveFlag].lang"> </li>
-        <!-- <li>Lingua: {{element.original_language}}</li> -->
-        <li>Voto: {{element.vote_average}}</li>
+        <li>
+            Titolo: {{element.name}}
+        </li>
+        <li>
+            Titolo originale: {{element.original_name}}
+        </li>
+        <li>
+            Lingua: 
+            <img 
+            class="flag" 
+            :src="require('../assets/img/' + flagArray[currentActiveFlag].flag)" 
+            :alt="flagArray[currentActiveFlag].lang"> 
+        </li>
+        <li>
+            Voto:
+            <i 
+            v-for="(element, index) in (0 + vote)" 
+            :key="index" 
+            class="fas fa-star">
+            </i>
+            <i 
+            v-for="(element, index) in (5 - vote)" 
+            :key="index" 
+            class="far fa-star">
+            </i>
+        </li>
+        <li>
+            <img 
+            :src="urlImages + element.poster_path" 
+            :alt="element.original_title">
+        </li>
     </ul>
 </template>
 
@@ -17,6 +43,7 @@
         },
         data: function(){
             return{
+                urlImages: 'https://image.tmdb.org/t/p/w342',
                 currentActiveFlag: null,
                 flagArray: [
                     {
@@ -37,7 +64,7 @@
                     },
                     {
                         lang: 'none',
-                        flag: 'mondo.jpg'
+                        flag: 'terra.png'
                     },
                 ]
             }
@@ -45,6 +72,8 @@
         methods: {
         },
         created: function (){
+
+            // Funzione per determinare quale bandiera mettere per la lingua
             if (this.element.original_language === 'it'){
                 this.currentActiveFlag = 0;
             } else if (this.element.original_language === 'en'){
@@ -55,6 +84,22 @@
                 this.currentActiveFlag = 3
             } else {
                 this.currentActiveFlag = 4
+            };
+
+
+            // Funzione per determinare il voto tramite stelle
+            if(this.element.vote_average > 8.5){
+                this.vote = 5
+            } else if (this.element.vote_average > 6.5) {
+                this.vote = 4
+            } else if (this.element.vote_average > 4.5) {
+                this.vote = 3
+            } else if (this.element.vote_average > 2.5) {
+                this.vote = 2
+            } else if (this.element.vote_average > 0.5) {
+                this.vote = 1
+            } else{
+                this.vote = null
             }
         }
     }
@@ -62,7 +107,7 @@
 
 <style lang="scss" scoped>
 .single-card{
-    width: calc((100% / 5) - 40px);
+    width: calc((100% / 3) - 40px);
     margin: 20px;
     list-style-type: none;
     border: 1px solid black;
@@ -76,10 +121,11 @@
         font-size: 20px;
     }
 
-    img{
+    .flag{
         width: 25px;
         height: 20px;
         border-radius: 10px;
+        vertical-align: middle;
     }
 }    
 </style>

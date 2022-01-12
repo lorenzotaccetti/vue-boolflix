@@ -2,19 +2,20 @@
     <main>
         <div>
             <h2>Risultati della ricerca per: {{text}}</h2>
-            <div v-if="movies.length > 0">
-                <div>
-                    <h2>Film:</h2>
-                </div>
-                <div class="container">
-                    <SingleCardMovies v-for="(element, index) in movies" :key="index" :element="element" />
-                </div>
-                <div>
-                    <h2>Serie TV:</h2>
-                </div>
-                <div class="container">
-                    <SingleCardTv v-for="(element, index) in tvseries" :key="index" :element="element"/>
-                </div>
+            <div>
+                <h2>Film:</h2>
+            </div>
+            <div v-if="movies.length > 0" class="container">
+                <SingleCardMovies v-for="(element, index) in movies" :key="index" :element="element" />
+            </div>
+            <div v-else class="no-result">
+                <h3>Nessun risultato</h3>
+            </div>
+            <div>
+                <h2>Serie TV:</h2>
+            </div>
+            <div v-if="tvseries.length > 0" class="container">
+                <SingleCardTv v-for="(element, index) in tvseries" :key="index" :element="element"/>
             </div>
             <div v-else class="no-result">
                 <h3>Nessun risultato</h3>

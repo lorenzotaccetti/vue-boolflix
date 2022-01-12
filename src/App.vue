@@ -47,6 +47,7 @@ export default {
           query: this.researchText
         }
       }).then((response) => {
+        // Riempio l'array nei data con le informazioni date dall'API
         this.tvSeriesArray = response.data.results
       });
     },
@@ -61,6 +62,11 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+img{
+  width: 100%;
+  height: 100%;
 }
 
 </style>
