@@ -104,7 +104,7 @@
                 </span>
             </li>
             <!-- Attori Tv-->
-            <!-- <li v-if="actorsArrayTv.length > 0 || actorsArrayMovie.length > 0">
+            <!-- <li v-if="actorsArrayTv.length > 0">
                 <span class="bold">
                     Attori:
                 </span>
@@ -112,14 +112,6 @@
                 v-for="(elementTv, index) in actorsArrayTv"
                 :key="index">
                     {{elementTv.name}}
-                </span>
-            </li>
-            <li v-else>
-                <span class="bold">
-                    Attori:
-                </span> 
-                <span>
-                    nessun dato
                 </span>
             </li> -->
         </ul>
@@ -176,17 +168,19 @@ export default {
                 }
             }).then((response) => {
                 this.actorsArrayMovie = response.data.cast
+                console.log(this.actorsArrayMovie)
             });
         },
         getTvCredits: function(){
-            axios.get('https://api.themoviedb.org/3/tv/' + this.element.id + '/credits', {
-                params: {
-                    api_key : this.apiKey
-                }
-            }).then((response) => {
-                this.actorsArrayTv = response.data.cast
-                console.log(this.actorsArrayTv)
-            })
+            // axios.get('https://api.themoviedb.org/3/tv/' + this.element.id + '/credits', {
+            //     params: {
+            //         api_key : this.apiKey
+            //     }
+            // }).then((response) => {
+            //     // this.actorsArrayTv = response.data.cast
+            //     console.log(response.data.cast)
+            // })
+            console.log('ciao')
         }
     },
     computed: {
