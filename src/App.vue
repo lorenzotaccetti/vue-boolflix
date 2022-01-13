@@ -3,7 +3,11 @@
     <!-- Header -->
     <Header @searchClicked="searchClicked" />
     <!-- Main -->
-    <Main :movies="moviesArray" :tvseries="tvSeriesArray" :text="researchText" :starWarsFilm="starWarsArray" />
+    <Main 
+    :movies="moviesArray" 
+    :tvseries="tvSeriesArray" 
+    :text="researchText" 
+    :starWarsFilm="starWarsArray" />
   </div>
 </template>
 
@@ -72,14 +76,14 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&family=Vujahday+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;1,400;1,700&family=Roboto+Condensed:wght@300;400&family=Vujahday+Script&display=swap');
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: black;
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 img{

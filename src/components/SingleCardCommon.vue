@@ -1,12 +1,14 @@
 <template>
     <div class="single-card">
         <!-- Immagine di copertina -->
-        <ul class="front">
-            <li>
+        <div class="front">
+            <div>
+                <!-- Immagine di copertina -->
                 <img
                 v-if="element.poster_path !== null" 
                 :src="urlImages + element.poster_path" 
                 :alt="element.original_title">
+                <!-- Immagine sostitutiva -->
                 <div v-else>
                     <img
                     src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs=" 
@@ -22,8 +24,8 @@
                         {{element.name}}
                     </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </div>
         <!-- Informazioni del film -->
         <ul class="back">  
             <!-- Titolo -->
@@ -209,12 +211,17 @@ export default {
 
     ul{
         list-style-type: none;
-        overflow-y: auto;
-
 
         li{
-            margin-bottom: 10px;
-            font-size: 20px;
+            margin-top: 10px;
+            margin-bottom: 25px;
+            font-size: 18px;
+            // Soluzione trovata con Alessio per non modificare le dimensioni delle card all'hover a causa della grandezza dell'overview
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            word-break: normal;
 
             .flag{
                 width: 25px;
@@ -227,6 +234,7 @@ export default {
                 font-weight: 600;
                 padding-right: 10px;
                 color: blueviolet;
+                font-size: 20px;
             }
         }
     }

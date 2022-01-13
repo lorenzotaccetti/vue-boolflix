@@ -1,15 +1,15 @@
 <template>
     <main>
-        <h2>Inizia a seguire la saga di Star Wars direttamente dalla nostra app</h2>
+        <div class="intestazione">Inizia a seguire la saga di Star Wars direttamente dalla nostra app</div>
         <div class="container">
             <StarWars v-for="(starWarsDetails, index) in starWarsFilm" :key="index" :starWarsDetails="starWarsDetails" />
         </div>
         <div 
         v-if="movies.length > 0 || tvseries.length > 0">
-            <div>
-                <h2>
+            <div class="paddingtop">
+                <div class="intestazione">
                     Film trovati per: '{{text}}'
-                </h2>
+                </div>
             </div>
             <div 
             class="container">
@@ -18,10 +18,10 @@
                 :key="index" 
                 :element="element" />
             </div>
-            <div class="serietv">
-                <h2>
+            <div class="paddingtop">
+                <div class="intestazione">
                     Serie tv trovate per: '{{text}}'
-                </h2>
+                </div>
             </div>
             <div  
             class="container">
@@ -35,12 +35,13 @@
         v-else 
         class="no-result">
             <h3 
-            class="serietv"
+            class="paddingtop"
             v-if="text === ''">
                 Inizia a cercare qualcosa che ti interessa
             </h3>
             <h3
-            v-else>
+            v-else
+            class="paddingtop">
                 Nessun risultato
             </h3>
         </div>
@@ -73,11 +74,13 @@ main{
     color: white;
     margin: 50px 0;
 
-    .serietv{
+    .paddingtop{
         padding-top: 100px;
     }
 
-    h2{
+    .intestazione{
+        font-size: 30px;
+        font-weight: bold;
         padding: 30px;
         text-transform: uppercase;
         color: #e20a13;
