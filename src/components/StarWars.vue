@@ -20,21 +20,30 @@
             </li>
         </ul>
         <!-- Informazioni del film -->
-        <ul class="back">  
+        <ul 
+        class="back">  
             <!-- Titolo -->
             <li>
-                <span class="bold">Titolo:</span>
+                <span 
+                class="bold">
+                    Titolo:
+                </span>
                 {{starWarsDetails.title}}
             </li>
             <!-- Titolo originale -->
-            <li
-            >
-                <span class="bold">Titolo originale:</span>
+            <li>
+                <span 
+                class="bold">
+                    Titolo originale:
+                </span>
                 {{starWarsDetails.original_title}}
             </li>
             <!-- Lingua -->
             <li>
-                <span class="bold">Lingua:</span> 
+                <span 
+                class="bold">
+                    Lingua:
+                </span> 
                 <img 
                 class="flag" 
                 :src="require('../assets/img/' + flagArray[activeFlag].flag)" 
@@ -42,7 +51,10 @@
             </li>
             <!-- Voto -->
             <li>
-                <span class="bold">Voto:</span>
+                <span 
+                class="bold">
+                    Voto:
+                </span>
                 <i 
                 v-for="(element, index) in (0 + starVote)" 
                 :key="index" 
@@ -55,12 +67,18 @@
                 </i>
             </li>
             <!-- Overview -->
-            <li v-if="starWarsDetails.overview">
-                <span class="bold">Overview:</span>
+            <li 
+            v-if="starWarsDetails.overview">
+                <span 
+                class="bold">
+                    Overview:
+                </span>
                 {{starWarsDetails.overview}}
             </li>
-            <li v-else>
-                <span class="bold">
+            <li 
+            v-else>
+                <span 
+                class="bold">
                     Overview:
                 </span>
                 non disponibile
