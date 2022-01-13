@@ -181,6 +181,7 @@
     .back{
         display: none;
         padding: 15px;
+        // height: 450px;
         // overflow-y: auto;
     }
 
