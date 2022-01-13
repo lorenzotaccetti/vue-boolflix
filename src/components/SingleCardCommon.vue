@@ -194,11 +194,9 @@ export default {
         mouseEnterFunctions: function(){
             if(this.element.title){
                 this.getMovieCredits();
-                this.getGenreList();
                 this.genreId();
             } else if(this.element.name){
                 this.getTvCredits();
-                this.getGenreListTv();
                 this.genreIdTv()
             }
         },
@@ -220,15 +218,6 @@ export default {
                 this.actorsArrayTv = response.data.cast
             })
         },
-        getGenreList: function (){
-            axios.get('https://api.themoviedb.org/3/genre/movie/list',{
-                params: {
-                    api_key : 'eb32925ee4340f32b75ef0f48a3de4d6',
-                }
-            }).then((response) => {
-                this.genresList = response.data.genres
-            })
-        },
         genreId: function(){
             this.genresList.forEach((genres) =>{
                 if(this.element.genre_ids.includes(genres.id)){
@@ -236,15 +225,7 @@ export default {
                 }
             })
         },
-        getGenreListTv: function(){
-            axios.get('https://api.themoviedb.org/3/genre/tv/list', {
-                params: {
-                    api_key :  'eb32925ee4340f32b75ef0f48a3de4d6',
-                } 
-            }).then((response) => {
-                this.genreListTv = response.data.genres
-            })
-        },
+
         genreIdTv: function(){
             this.genreListTv.forEach((genresTv) => {
                 if(this.element.genre_ids.includes(genresTv.id)){
@@ -253,6 +234,25 @@ export default {
             })
         }
 
+    },
+    created: function(){
+        // Chiamata API per prendere lista generi serie tv
+        axios.get('https://api.themoviedb.org/3/genre/tv/list', {
+            params: {
+                api_key :  'eb32925ee4340f32b75ef0f48a3de4d6',
+            } 
+        }).then((response) => {
+            this.genreListTv = response.data.genres
+        });
+
+        // Chiamata API per prendere lista generi film
+        axios.get('https://api.themoviedb.org/3/genre/movie/list',{
+            params: {
+                api_key : 'eb32925ee4340f32b75ef0f48a3de4d6',
+            }
+        }).then((response) => {
+            this.genresList = response.data.genres
+        })
     },
     computed: {
         activeFlag: function(){
