@@ -7,7 +7,8 @@
     :movies="moviesArray" 
     :tvseries="tvSeriesArray" 
     :text="researchText" 
-    :starWarsFilm="starWarsArray" />
+    :starWarsFilm="starWarsArray"
+    :apiKey="api_key" />
   </div>
 </template>
 

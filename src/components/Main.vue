@@ -2,7 +2,11 @@
     <main>
         <div class="intestazione">Inizia a seguire la saga di Star Wars direttamente dalla nostra app</div>
         <div class="container">
-            <StarWars v-for="(starWarsDetails, index) in starWarsFilm" :key="index" :starWarsDetails="starWarsDetails" />
+            <StarWars 
+            v-for="(starWarsDetails, index) in starWarsFilm" 
+            :key="index" 
+            :starWarsDetails="starWarsDetails" 
+            :apiKey="apiKey" />
         </div>
         <div 
         v-if="movies.length > 0 || tvseries.length > 0">
@@ -16,7 +20,8 @@
                 <SingleCardCommon 
                 v-for="(element, index) in movies" 
                 :key="index" 
-                :element="element" />
+                :element="element"
+                :apiKey="apiKey" />
             </div>
             <div class="paddingtop">
                 <div class="intestazione">
@@ -62,7 +67,8 @@ export default {
         movies : Array,
         tvseries: Array,
         text : String,
-        starWarsFilm : Array
+        starWarsFilm : Array,
+        apiKey : String
     },
 }
 </script>

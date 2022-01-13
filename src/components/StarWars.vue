@@ -1,5 +1,5 @@
 <template>
-    <div class="single-card">
+    <div @mouseenter="getMovieCredits" class="single-card">
         <!-- Immagine di copertina -->
         <div class="front">
             <div>
@@ -84,18 +84,41 @@
                 </span>
                 non disponibile
             </li>
+            <!-- Attori Film -->
+            <li 
+            v-if="actorsArrayMovie.length > 0" >
+                <span class="bold">
+                    Attori:
+                </span> 
+                <div
+                v-for="(element, index) in actorsArrayMovie" 
+                :key="index">
+                    {{element.name}}
+                </div>
+            </li>
+            <li v-else>
+                <span class="bold">
+                    Attori:
+                </span> 
+                <span>
+                    nessun dato
+                </span>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
     export default {
         name: 'StarWars',
         props: {
-            starWarsDetails : Object
+            starWarsDetails : Object,
+            apiKey: String
         },
         data: function(){
             return{
+                actorsArrayMovie: [],
                 urlImages: 'https://image.tmdb.org/t/p/w342',
                 flagArray: [
                     {
@@ -120,6 +143,17 @@
                     },
                 ]
             }
+        },
+        methods: {
+            getMovieCredits: function(){
+                axios.get('https://api.themoviedb.org/3/movie/' + this.starWarsDetails.id +'/credits', {
+                    params: {
+                        api_key : this.apiKey
+                    }
+                }).then((response) => {
+                    this.actorsArrayMovie = response.data.cast
+                });
+            },
         },
         computed: {
             activeFlag: function(){

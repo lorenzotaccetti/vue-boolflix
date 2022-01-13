@@ -1,5 +1,5 @@
 <template>
-    <div class="single-card">
+    <div @mouseenter="mouseEnterFunctions" class="single-card">
         <!-- Immagine di copertina -->
         <div class="front">
             <div>
@@ -83,18 +83,62 @@
                 </span>
                 non disponibile
             </li>
+            <!-- Attori Film -->
+            <li 
+            v-if="actorsArrayMovie.length > 0" >
+                <span class="bold">
+                    Attori:
+                </span> 
+                <div
+                v-for="(element, index) in actorsArrayMovie" 
+                :key="index">
+                    {{element.name}}
+                </div>
+            </li>
+            <li v-else>
+                <span class="bold">
+                    Attori:
+                </span> 
+                <span>
+                    nessun dato
+                </span>
+            </li>
+            <!-- Attori Tv-->
+            <!-- <li v-if="actorsArrayTv.length > 0 || actorsArrayMovie.length > 0">
+                <span class="bold">
+                    Attori:
+                </span>
+                <span
+                v-for="(elementTv, index) in actorsArrayTv"
+                :key="index">
+                    {{elementTv.name}}
+                </span>
+            </li>
+            <li v-else>
+                <span class="bold">
+                    Attori:
+                </span> 
+                <span>
+                    nessun dato
+                </span>
+            </li> -->
         </ul>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'SingleCardCommon',
     props:{
         element: Object,
+        apiKey: String
     },
     data: function(){
         return{
+            actorsArrayMovie: [],
+            actorsArrayTv: [],
             urlImages: 'https://image.tmdb.org/t/p/w342',
             flagArray: [
                 {
@@ -118,6 +162,31 @@ export default {
                     flag: 'terra.png'
                 },
             ]
+        }
+    },
+    methods:{
+        mouseEnterFunctions: function(){
+            this.getMovieCredits()
+            this.getTvCredits()
+        },
+        getMovieCredits: function(){
+            axios.get('https://api.themoviedb.org/3/movie/' + this.element.id +'/credits', {
+                params: {
+                    api_key : this.apiKey
+                }
+            }).then((response) => {
+                this.actorsArrayMovie = response.data.cast
+            });
+        },
+        getTvCredits: function(){
+            axios.get('https://api.themoviedb.org/3/tv/' + this.element.id + '/credits', {
+                params: {
+                    api_key : this.apiKey
+                }
+            }).then((response) => {
+                this.actorsArrayTv = response.data.cast
+                console.log(this.actorsArrayTv)
+            })
         }
     },
     computed: {
