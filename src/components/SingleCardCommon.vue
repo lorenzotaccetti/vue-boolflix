@@ -191,6 +191,7 @@ export default {
         }
     },
     methods:{
+        // Funzione che attiva le altre funzioni al mouseenter
         mouseEnterFunctions: function(){
             if(this.element.title){
                 this.getMovieCredits();
@@ -200,6 +201,7 @@ export default {
                 this.genreIdTv()
             }
         },
+        // Funzione che chiama l'API per la lista di attori nei film
         getMovieCredits: function(){
             axios.get('https://api.themoviedb.org/3/movie/' + this.element.id +'/credits', {
                 params: {
@@ -209,6 +211,7 @@ export default {
                 this.actorsArrayMovie = response.data.cast
             });
         },
+        // Funzione che chiama l'API per la lista di attori nelle serie tv
         getTvCredits: function(){
             axios.get('https://api.themoviedb.org/3/tv/' + this.element.id + '/credits', {
                 params: {
@@ -218,6 +221,7 @@ export default {
                 this.actorsArrayTv = response.data.cast
             })
         },
+        // Funzione per determinare il genere dall'id del film
         genreId: function(){
             this.genresList.forEach((genres) =>{
                 if(this.element.genre_ids.includes(genres.id)){
@@ -225,7 +229,7 @@ export default {
                 }
             })
         },
-
+        // Funzione per determinare il genere dall'id delle serie tv
         genreIdTv: function(){
             this.genreListTv.forEach((genresTv) => {
                 if(this.element.genre_ids.includes(genresTv.id)){
