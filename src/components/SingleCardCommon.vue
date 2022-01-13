@@ -1,5 +1,6 @@
 <template>
     <div class="single-card">
+        <!-- Immagine di copertina -->
         <ul class="front">
             <li>
                 <img
@@ -23,7 +24,9 @@
                 </div>
             </li>
         </ul>
+        <!-- Informazioni del film -->
         <ul class="back">  
+            <!-- Titolo -->
             <li 
             v-if="element.title">
                 <span class="bold">Titolo:</span>
@@ -44,6 +47,7 @@
                 <span class="bold">Titolo originale:</span> 
                 {{element.original_name}}
             </li>
+            <!-- Lingua -->
             <li>
                 <span class="bold">Lingua:</span> 
                 <img 
@@ -51,6 +55,7 @@
                 :src="require('../assets/img/' + flagArray[activeFlag].flag)" 
                 :alt="flagArray[activeFlag].lang"> 
             </li>
+            <!-- Voto -->
             <li>
                 <span class="bold">Voto:</span>
                 <i 
@@ -64,7 +69,9 @@
                 class="far fa-star">
                 </i>
             </li>
-            <li v-if="element.overview">
+            <!-- Overview -->
+            <li 
+            v-if="element.overview">
                 <span class="bold">Overview:</span>
                 {{element.overview}}
             </li>
@@ -191,6 +198,7 @@ export default {
         padding: 15px;
     }
 
+    // Effetti all'hover
     &:hover .front{
         display: none;
     }
@@ -224,7 +232,7 @@ export default {
     }
 }
 
-
+// Mediaquery
 @media screen and (min-width: 576px) {
     .single-card{
         width:calc((100% / 2) - 20px)

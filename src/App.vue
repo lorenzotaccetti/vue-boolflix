@@ -1,6 +1,8 @@
 <template>
   <div id="app">
+    <!-- Header -->
     <Header @searchClicked="searchClicked" />
+    <!-- Main -->
     <Main :movies="moviesArray" :tvseries="tvSeriesArray" :text="researchText" :starWarsFilm="starWarsArray" />
   </div>
 </template>

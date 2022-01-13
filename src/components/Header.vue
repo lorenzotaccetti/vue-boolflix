@@ -1,12 +1,15 @@
 <template>
     <header>
+        <!-- Logo -->
         <div class="logo">
             <img src="../assets/img/netflixlogo.png" alt="logo Netflix">
         </div>
+        <!-- Input -->
         <input 
         v-model="researchText" 
         type="text" 
         placeholder="Cerca un film o una serie tv">
+        <!-- Bottone -->
         <button 
         @click="$emit('searchClicked', researchText)">
             Cerca

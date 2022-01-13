@@ -1,5 +1,6 @@
 <template>
     <div class="single-card">
+        <!-- Immagine di copertina -->
         <ul class="front">
             <li>
                 <img
@@ -18,6 +19,7 @@
                 </div>
             </li>
         </ul>
+        <!-- Informazioni del film -->
         <ul class="back">  
             <li 
             v-if="starWarsDetails.title">
