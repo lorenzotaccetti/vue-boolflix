@@ -8,7 +8,7 @@
         v-if="movies.length > 0 || tvseries.length > 0">
             <div>
                 <h2>
-                    Film trovati per: {{text}}
+                    Film trovati per: '{{text}}'
                 </h2>
             </div>
             <div 
@@ -20,7 +20,7 @@
             </div>
             <div class="serietv">
                 <h2>
-                    Serie tv trovate per: {{text}}
+                    Serie tv trovate per: '{{text}}'
                 </h2>
             </div>
             <div  
@@ -80,6 +80,7 @@ main{
     h2{
         padding: 30px;
         text-transform: uppercase;
+        color: #e20a13;
     }
     
     .container{
@@ -94,6 +95,7 @@ main{
         margin-top: 30px;
         display: flex;
         justify-content: center;
+        color: #e20a13;
     }
 }
 </style>

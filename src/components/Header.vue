@@ -37,11 +37,18 @@ header{
     .logo{
         flex-grow: 1;
         margin-left: 30px;
+        display: none;
 
         img{ 
             vertical-align: middle;
             width: 200px;
             height: 100px;
+        }
+    }
+
+    @media screen and (min-width: 700px) {
+        .logo{
+            display: inline-block;
         }
     }
 

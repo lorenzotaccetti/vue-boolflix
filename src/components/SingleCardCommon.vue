@@ -201,7 +201,6 @@ export default {
 
     ul{
         list-style-type: none;
-        height: 450px;
         overflow-y: auto;
 
 
@@ -219,7 +218,7 @@ export default {
             .bold{
                 font-weight: 600;
                 padding-right: 10px;
-                color: #e20a13;
+                color: blueviolet;
             }
         }
     }
@@ -244,7 +243,7 @@ export default {
 };
 @media screen and (min-width: 1200px){
     .single-card{
-        width: calc((100% / 5) - 20px)
+        width: calc((100% / 6) - 20px)
     }
 }
 </style>
