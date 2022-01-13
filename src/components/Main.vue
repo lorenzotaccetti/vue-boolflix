@@ -1,38 +1,58 @@
 <template>
     <main>
         <div>
-            <h2>Risultati della ricerca per: {{text}}</h2>
+            <h2>
+                Risultati della ricerca per: {{text}}
+            </h2>
             <div>
-                <h2>Film:</h2>
+                <h2>
+                    Film:
+                </h2>
             </div>
-            <div v-if="movies.length > 0" class="container">
-                <SingleCardMovies v-for="(element, index) in movies" :key="index" :element="element" />
+            <div 
+            v-if="movies.length > 0" 
+            class="container">
+                <SingleCardCommon 
+                v-for="(element, index) in movies" 
+                :key="index" 
+                :element="element" />
             </div>
-            <div v-else class="no-result">
-                <h3>Nessun risultato</h3>
+            <div 
+            v-else class="no-result">
+                <h3>
+                    Nessun risultato
+                </h3>
             </div>
             <div>
-                <h2>Serie TV:</h2>
+                <h2>
+                    Serie TV:
+                </h2>
             </div>
-            <div v-if="tvseries.length > 0" class="container">
-                <SingleCardTv v-for="(element, index) in tvseries" :key="index" :element="element"/>
+            <div 
+            v-if="tvseries.length > 0" 
+            class="container">
+                <SingleCardCommon 
+                v-for="(element, index) in tvseries" 
+                :key="index" 
+                :element="element"/>
             </div>
-            <div v-else class="no-result">
-                <h3>Nessun risultato</h3>
+            <div 
+            v-else class="no-result">
+                <h3>
+                    Nessun risultato
+                </h3>
             </div>
         </div>
     </main>
 </template>
 
 <script>
-import SingleCardMovies from './SingleCardMovies.vue';
-import SingleCardTv from './SingleCardTv.vue';
+import SingleCardCommon from './SingleCardCommon.vue';
 
 export default {
     name: 'Main',
     components: {
-        SingleCardMovies,
-        SingleCardTv,
+        SingleCardCommon
     },
     props: {
         movies : Array,
@@ -54,7 +74,7 @@ main{
         width: 90%;
         margin: auto;
         display: flex;
-        flex-wrap: wrap;
+        overflow-x: auto;
     }
 
     .no-result{

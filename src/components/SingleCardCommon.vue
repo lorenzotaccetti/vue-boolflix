@@ -1,0 +1,184 @@
+<template>
+    <ul class="single-card">  
+        <li 
+        v-if="element.title">
+            Titolo: {{element.title}}
+        </li>
+        <li
+        v-else>
+            Titolo: {{element.name}}
+        </li>
+        <li
+        v-if="element.original_title">
+            Titolo originale: {{element.original_title}}
+        </li>
+        <li
+        v-else>
+            Titolo originale: {{element.original_name}}
+        </li>
+        <li>
+            Lingua: 
+            <img 
+            class="flag" 
+            :src="require('../assets/img/' + flagArray[activeFlag].flag)" 
+            :alt="flagArray[activeFlag].lang"> 
+        </li>
+        <li>
+            Voto:
+            <i 
+            v-for="(element, index) in (0 + starVote)" 
+            :key="index" 
+            class="fas fa-star">
+            </i>
+            <i 
+            v-for="(element, index) in (5 - starVote)" 
+            :key="index" 
+            class="far fa-star">
+            </i>
+        </li>
+        <li>
+            <img
+            v-if="element.poster_path !== null" 
+            :src="urlImages + element.poster_path" 
+            :alt="element.original_title">
+            <img
+            v-else
+            src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs=" 
+            alt="image not found">
+        </li>
+    </ul>
+</template>
+
+<script>
+export default {
+    name: 'SingleCardCommon',
+    props:{
+        element: Object,
+    },
+    data: function(){
+        return{
+            urlImages: 'https://image.tmdb.org/t/p/w342',
+            flagArray: [
+                {
+                    lang: 'it',
+                    flag: 'ita.png'
+                },
+                {
+                    lang: 'en',
+                    flag: 'uk.png'
+                },
+                {
+                    lang: 'es',
+                    flag: 'spn.png'
+                },
+                {
+                    lang: 'fr',
+                    flag: 'frc.png'
+                },
+                {
+                    lang: 'none',
+                    flag: 'terra.png'
+                },
+            ]
+        }
+    },
+    computed: {
+        activeFlag: function(){
+
+            // Funzione per determinare quale bandiera mettere per la lingua
+
+            let currentActiveFlag = null;
+
+            if (this.element.original_language === 'it'){
+                currentActiveFlag = 0;
+                return currentActiveFlag
+            } else if (this.element.original_language === 'en'){
+                currentActiveFlag = 1;
+                return currentActiveFlag
+            } else if (this.element.original_language === 'es'){
+                currentActiveFlag = 2;
+                return currentActiveFlag
+            } else if (this.element.original_language === 'fr'){
+                currentActiveFlag = 3;
+                return currentActiveFlag
+            } else {
+                currentActiveFlag = 4;
+                return currentActiveFlag
+            };
+        },
+        starVote: function(){
+
+            // Funzione per trasformare il voto in decimali in voto in stelle
+
+            let vote = null;
+
+            if(this.element.vote_average > 8.5){
+                vote = 5
+                return vote;
+            } else if (this.element.vote_average > 6.5) {
+                vote = 4
+                return vote;
+            } else if (this.element.vote_average > 4.5) {
+                vote = 3
+                return vote;
+            } else if (this.element.vote_average > 2.5) {
+                vote = 2
+                return vote;
+            } else if (this.element.vote_average > 0.5) {
+                vote = 1
+                return vote;
+            }
+
+            return vote;
+        },
+    },
+}
+</script>
+
+<style lang="scss" scoped>
+.single-card{
+    width: calc((100% / 1) - 20px);
+    margin: 10px;
+    list-style-type: none;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    color: black;
+    padding: 15px;
+    flex-shrink: 0;
+}
+
+li{
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.flag{
+    width: 25px;
+    height: 20px;
+    border-radius: 10px;
+    vertical-align: middle;
+}
+
+@media screen and (min-width: 576px) {
+    .single-card{
+        width:calc((100% / 2) - 20px)
+    }
+}
+
+@media screen and (min-width: 768px){
+    .single-card{
+        width: calc((100% / 3) - 20px)
+    }
+};
+@media screen and (min-width: 992px){
+    .single-card{
+        width: calc((100% / 4) - 20px)
+    }
+};
+@media screen and (min-width: 1200px){
+    .single-card{
+        width: calc((100% / 5) - 20px)
+    }
+}
+</style>
