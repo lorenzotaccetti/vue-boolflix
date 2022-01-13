@@ -127,6 +127,23 @@
                     </span>
                 </div>
             </li>
+            <!-- Generi -->
+            <li v-if="element.title">
+                <span class="bold">
+                    Generi:
+                </span>
+                <span>
+                    {{genreStringMovie}}
+                </span>
+            </li>
+            <li v-else>
+                <span class="bold">
+                    Generi:
+                </span>
+                <span>
+                    {{genreStringTv}}
+                </span>
+            </li>
         </ul>
     </div>
 </template>
@@ -144,6 +161,10 @@ export default {
         return{
             actorsArrayMovie: [],
             actorsArrayTv: [],
+            genresList: [],
+            genreListTv: [],
+            genreStringMovie: '',
+            genreStringTv: '',
             urlImages: 'https://image.tmdb.org/t/p/w342',
             flagArray: [
                 {
@@ -172,9 +193,13 @@ export default {
     methods:{
         mouseEnterFunctions: function(){
             if(this.element.title){
-                this.getMovieCredits()
+                this.getMovieCredits();
+                this.getGenreList();
+                this.genreId();
             } else if(this.element.name){
-                this.getTvCredits()
+                this.getTvCredits();
+                this.getGenreListTv();
+                this.genreIdTv()
             }
         },
         getMovieCredits: function(){
@@ -184,7 +209,6 @@ export default {
                 }
             }).then((response) => {
                 this.actorsArrayMovie = response.data.cast
-                console.log(this.actorsArrayMovie)
             });
         },
         getTvCredits: function(){
@@ -195,7 +219,40 @@ export default {
             }).then((response) => {
                 this.actorsArrayTv = response.data.cast
             })
+        },
+        getGenreList: function (){
+            axios.get('https://api.themoviedb.org/3/genre/movie/list',{
+                params: {
+                    api_key : 'eb32925ee4340f32b75ef0f48a3de4d6',
+                }
+            }).then((response) => {
+                this.genresList = response.data.genres
+            })
+        },
+        genreId: function(){
+            this.genresList.forEach((genres) =>{
+                if(this.element.genre_ids.includes(genres.id)){
+                    this.genreStringMovie = genres.name
+                }
+            })
+        },
+        getGenreListTv: function(){
+            axios.get('https://api.themoviedb.org/3/genre/tv/list', {
+                params: {
+                    api_key :  'eb32925ee4340f32b75ef0f48a3de4d6',
+                } 
+            }).then((response) => {
+                this.genreListTv = response.data.genres
+            })
+        },
+        genreIdTv: function(){
+            this.genreListTv.forEach((genresTv) => {
+                if(this.element.genre_ids.includes(genresTv.id)){
+                    this.genreStringTv = genresTv.name
+                }
+            })
         }
+
     },
     computed: {
         activeFlag: function(){
