@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header @searchClicked="searchClicked" />
-    <Main :movies="moviesArray" :tvseries="tvSeriesArray" :text="researchText" />
+    <Main :movies="moviesArray" :tvseries="tvSeriesArray" :text="researchText" :starWarsFilm="starWarsArray" />
   </div>
 </template>
 
@@ -21,6 +21,8 @@ export default {
       researchText: '',
       moviesArray: [],
       tvSeriesArray: [],
+      starWarsArray: [],
+      api_key: 'eb32925ee4340f32b75ef0f48a3de4d6',
     }
   },
   methods: {
@@ -31,7 +33,7 @@ export default {
       // Chiamata all'API per i film
       axios.get('https://api.themoviedb.org/3/search/movie', {
         params: {
-          api_key: 'eb32925ee4340f32b75ef0f48a3de4d6',
+          api_key: this.api_key,
           query: this.researchText
         }
       })
@@ -43,7 +45,7 @@ export default {
       // Chiamata all'API per le serie tv
       axios.get('https://api.themoviedb.org/3/search/tv',{
         params: {
-          api_key: 'eb32925ee4340f32b75ef0f48a3de4d6',
+          api_key: this.api_key,
           query: this.researchText
         }
       }).then((response) => {
@@ -53,16 +55,29 @@ export default {
     },
 
   },
+  created: function(){
+    // Chiamata all'API per film star wars
+    axios.get('https://api.themoviedb.org/3/search/movie', {
+      params:{
+        api_key: this.api_key,
+        query: 'star-wars',
+      }
+    }).then((response) => {
+      this.starWarsArray = response.data.results
+    });
+  }
 };
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&family=Vujahday+Script&display=swap');
 
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: black;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 img{

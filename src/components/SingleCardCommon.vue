@@ -6,10 +6,21 @@
                 v-if="element.poster_path !== null" 
                 :src="urlImages + element.poster_path" 
                 :alt="element.original_title">
-                <img
-                v-else
-                src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs=" 
-                alt="image not found">
+                <div v-else>
+                    <img
+                    src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs=" 
+                    alt="image not found">
+                    <div
+                    class="titolo-image" 
+                    v-if="element.title">
+                        {{element.title}}
+                    </div>
+                    <div
+                    class="titolo-image" 
+                    v-else>
+                        {{element.name}}
+                    </div>
+                </div>
             </li>
         </ul>
         <ul class="back">  
@@ -161,16 +172,23 @@ export default {
     border-radius: 10px;
     text-align: center;
     color: white;
-    padding: 15px;
     flex-shrink: 0;
     cursor: pointer;
+    overflow: hidden;
+    font-weight: 200;
 
     .front{
         display: block;
+
+        .titolo-image{
+            padding-top: 20px;
+            font-size: 30px;
+        }
     }
 
     .back{
         display: none;
+        padding: 15px;
     }
 
     &:hover .front{
@@ -183,7 +201,7 @@ export default {
 
     ul{
         list-style-type: none;
-        height: 400px;
+        height: 450px;
         overflow-y: auto;
 
 
@@ -201,6 +219,7 @@ export default {
             .bold{
                 font-weight: 600;
                 padding-right: 10px;
+                color: #e20a13;
             }
         }
     }
