@@ -21,22 +21,18 @@
         </ul>
         <!-- Informazioni del film -->
         <ul class="back">  
-            <li 
-            v-if="starWarsDetails.title">
+            <!-- Titolo -->
+            <li>
                 <span class="bold">Titolo:</span>
                 {{starWarsDetails.title}}
             </li>
-            <li
-            v-else>
-                <span class="bold">Titolo:</span>
-                {{starWarsDetails.name}}
-            </li>
+            <!-- Titolo originale -->
             <li
             >
                 <span class="bold">Titolo originale:</span>
                 {{starWarsDetails.original_title}}
             </li>
-
+            <!-- Lingua -->
             <li>
                 <span class="bold">Lingua:</span> 
                 <img 
@@ -44,6 +40,7 @@
                 :src="require('../assets/img/' + flagArray[activeFlag].flag)" 
                 :alt="flagArray[activeFlag].lang"> 
             </li>
+            <!-- Voto -->
             <li>
                 <span class="bold">Voto:</span>
                 <i 
@@ -57,6 +54,7 @@
                 class="far fa-star">
                 </i>
             </li>
+            <!-- Overview -->
             <li v-if="starWarsDetails.overview">
                 <span class="bold">Overview:</span>
                 {{starWarsDetails.overview}}
