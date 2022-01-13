@@ -34,16 +34,16 @@
         <div 
         v-else 
         class="no-result">
-            <h3 
-            class="paddingtop"
+            <div 
+            class="paddingtop intestazione"
             v-if="text === ''">
                 Inizia a cercare qualcosa che ti interessa
-            </h3>
-            <h3
+            </div>
+            <div
             v-else
-            class="paddingtop">
+            class="paddingtop intestazione">
                 Nessun risultato
-            </h3>
+            </div>
         </div>
     </main>
 </template>
