@@ -75,7 +75,9 @@
             <li 
             v-if="element.overview">
                 <span class="bold">Overview:</span>
-                {{element.overview}}
+                <div>
+                    {{element.overview}}
+                </div>
             </li>
             <li v-else>
                 <span class="bold">
@@ -132,17 +134,17 @@
                 <span class="bold">
                     Generi:
                 </span>
-                <span>
+                <div>
                     {{genreStringMovie}}
-                </span>
+                </div>
             </li>
             <li v-else>
                 <span class="bold">
                     Generi:
                 </span>
-                <span>
+                <div>
                     {{genreStringTv}}
-                </span>
+                </div>
             </li>
         </ul>
     </div>
