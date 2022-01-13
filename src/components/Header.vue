@@ -17,7 +17,7 @@
                     Film
                 </div>
                 <div class="nav-element">
-                    Originali
+                    Originali Boolflix
                 </div>
             </div>
         </div>
@@ -94,7 +94,7 @@ header{
         }
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 1250px) {
         .nav{
             display: flex;
         }
