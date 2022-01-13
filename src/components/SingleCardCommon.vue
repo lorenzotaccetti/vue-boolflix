@@ -84,36 +84,49 @@
                 non disponibile
             </li>
             <!-- Attori Film -->
-            <li 
-            v-if="actorsArrayMovie.length > 0" >
-                <span class="bold">
-                    Attori:
-                </span> 
+            <li v-if="element.title">
                 <div
-                v-for="(element, index) in actorsArrayMovie" 
-                :key="index">
-                    {{element.name}}
+                v-if="actorsArrayMovie.length > 0">
+                    <span class="bold">
+                        Attori:
+                    </span> 
+                    <div
+                    v-for="(element, index) in actorsArrayMovie" 
+                    :key="index">
+                        {{element.name}}
+                    </div>
+                </div>
+                <div v-else>
+                    <span class="bold">
+                        Attori:
+                    </span> 
+                    <span>
+                        nessun dato
+                    </span>
                 </div>
             </li>
-            <li v-else>
-                <span class="bold">
-                    Attori:
-                </span> 
-                <span>
-                    nessun dato
-                </span>
-            </li>
             <!-- Attori Tv-->
-            <!-- <li v-if="actorsArrayTv.length > 0">
-                <span class="bold">
-                    Attori:
-                </span>
-                <span
-                v-for="(elementTv, index) in actorsArrayTv"
-                :key="index">
-                    {{elementTv.name}}
-                </span>
-            </li> -->
+            <li v-else>
+                <div 
+                v-if="actorsArrayTv.length > 0">
+                    <span class="bold">
+                        Attori:
+                    </span>
+                    <span
+                    v-for="(elementTv, index) in actorsArrayTv"
+                    :key="index">
+                        {{elementTv.name}}
+                    </span>
+                </div>
+                <div v-else>
+                    <span class="bold">
+                        Attori:
+                    </span> 
+                    <span>
+                        nessun dato
+                    </span>
+                </div>
+            </li>
         </ul>
     </div>
 </template>
@@ -158,8 +171,11 @@ export default {
     },
     methods:{
         mouseEnterFunctions: function(){
-            this.getMovieCredits()
-            this.getTvCredits()
+            if(this.element.title){
+                this.getMovieCredits()
+            } else if(this.element.name){
+                this.getTvCredits()
+            }
         },
         getMovieCredits: function(){
             axios.get('https://api.themoviedb.org/3/movie/' + this.element.id +'/credits', {
@@ -172,15 +188,13 @@ export default {
             });
         },
         getTvCredits: function(){
-            // axios.get('https://api.themoviedb.org/3/tv/' + this.element.id + '/credits', {
-            //     params: {
-            //         api_key : this.apiKey
-            //     }
-            // }).then((response) => {
-            //     // this.actorsArrayTv = response.data.cast
-            //     console.log(response.data.cast)
-            // })
-            console.log('ciao')
+            axios.get('https://api.themoviedb.org/3/tv/' + this.element.id + '/credits', {
+                params: {
+                    api_key : 'eb32925ee4340f32b75ef0f48a3de4d6'
+                }
+            }).then((response) => {
+                this.actorsArrayTv = response.data.cast
+            })
         }
     },
     computed: {
