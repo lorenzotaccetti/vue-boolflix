@@ -1,52 +1,70 @@
 <template>
-    <ul class="single-card">  
-        <li 
-        v-if="element.title">
-            Titolo: {{element.title}}
-        </li>
-        <li
-        v-else>
-            Titolo: {{element.name}}
-        </li>
-        <li
-        v-if="element.original_title">
-            Titolo originale: {{element.original_title}}
-        </li>
-        <li
-        v-else>
-            Titolo originale: {{element.original_name}}
-        </li>
-        <li>
-            Lingua: 
-            <img 
-            class="flag" 
-            :src="require('../assets/img/' + flagArray[activeFlag].flag)" 
-            :alt="flagArray[activeFlag].lang"> 
-        </li>
-        <li>
-            Voto:
-            <i 
-            v-for="(element, index) in (0 + starVote)" 
-            :key="index" 
-            class="fas fa-star">
-            </i>
-            <i 
-            v-for="(element, index) in (5 - starVote)" 
-            :key="index" 
-            class="far fa-star">
-            </i>
-        </li>
-        <li>
-            <img
-            v-if="element.poster_path !== null" 
-            :src="urlImages + element.poster_path" 
-            :alt="element.original_title">
-            <img
-            v-else
-            src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs=" 
-            alt="image not found">
-        </li>
-    </ul>
+    <div class="single-card">
+        <ul class="front">
+            <li>
+                <img
+                v-if="element.poster_path !== null" 
+                :src="urlImages + element.poster_path" 
+                :alt="element.original_title">
+                <img
+                v-else
+                src="https://media.istockphoto.com/vectors/error-page-or-file-not-found-icon-vector-id924949200?k=20&m=924949200&s=170667a&w=0&h=-g01ME1udkojlHCZeoa1UnMkWZZppdIFHEKk6wMvxrs=" 
+                alt="image not found">
+            </li>
+        </ul>
+        <ul class="back">  
+            <li 
+            v-if="element.title">
+                <span class="bold">Titolo:</span>
+                {{element.title}}
+            </li>
+            <li
+            v-else>
+                <span class="bold">Titolo:</span>
+                {{element.name}}
+            </li>
+            <li
+            v-if="element.original_title">
+                <span class="bold">Titolo originale:</span>
+                {{element.original_title}}
+            </li>
+            <li
+            v-else>
+                <span class="bold">Titolo originale:</span> 
+                {{element.original_name}}
+            </li>
+            <li>
+                <span class="bold">Lingua:</span> 
+                <img 
+                class="flag" 
+                :src="require('../assets/img/' + flagArray[activeFlag].flag)" 
+                :alt="flagArray[activeFlag].lang"> 
+            </li>
+            <li>
+                <span class="bold">Voto:</span>
+                <i 
+                v-for="(element, index) in (0 + starVote)" 
+                :key="index" 
+                class="fas fa-star">
+                </i>
+                <i 
+                v-for="(element, index) in (5 - starVote)" 
+                :key="index" 
+                class="far fa-star">
+                </i>
+            </li>
+            <li v-if="element.overview">
+                <span class="bold">Overview:</span>
+                {{element.overview}}
+            </li>
+            <li v-else>
+                <span class="bold">
+                    Overview:
+                </span>
+                non disponibile
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -139,26 +157,55 @@ export default {
 .single-card{
     width: calc((100% / 1) - 20px);
     margin: 10px;
-    list-style-type: none;
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 10px;
     text-align: center;
-    color: black;
+    color: white;
     padding: 15px;
     flex-shrink: 0;
+    cursor: pointer;
+
+    .front{
+        display: block;
+    }
+
+    .back{
+        display: none;
+    }
+
+    &:hover .front{
+        display: none;
+    }
+
+    &:hover .back{
+        display: block;
+    }
+
+    ul{
+        list-style-type: none;
+        height: 400px;
+        overflow-y: auto;
+
+
+        li{
+            margin-bottom: 10px;
+            font-size: 20px;
+
+            .flag{
+                width: 25px;
+                height: 20px;
+                border-radius: 10px;
+                vertical-align: middle;
+            }
+
+            .bold{
+                font-weight: 600;
+                padding-right: 10px;
+            }
+        }
+    }
 }
 
-li{
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.flag{
-    width: 25px;
-    height: 20px;
-    border-radius: 10px;
-    vertical-align: middle;
-}
 
 @media screen and (min-width: 576px) {
     .single-card{

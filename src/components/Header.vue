@@ -1,7 +1,16 @@
 <template>
     <header>
-        <input v-model="researchText" type="text" placeholder="Cerca un film o una serie tv">
-        <button @click="$emit('searchClicked', researchText)">Cerca</button>
+        <div class="logo">
+            <img src="../assets/img/netflixlogo.png" alt="logo Netflix">
+        </div>
+        <input 
+        v-model="researchText" 
+        type="text" 
+        placeholder="Cerca un film o una serie tv">
+        <button 
+        @click="$emit('searchClicked', researchText)">
+            Cerca
+        </button>
     </header>
 </template>
 
@@ -18,25 +27,43 @@ export default {
 
 <style scoped lang="scss">
 header{
-    height: 100px;
+    height: 105px;
     line-height: 100px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e20a13;
+
+    .logo{
+        flex-grow: 1;
+        margin-left: 30px;
+
+        img{ 
+            vertical-align: middle;
+            width: 200px;
+            height: 100px;
+        }
+    }
 
     input{
         margin-left: 30px;
         margin-right: 30px;
         padding: 5px 20px;
-        min-width: 250px;
+        min-width: 350px;
         min-height: 30px;
         border-radius: 10px;
         text-align: center;
-        border: 1px solid black;
+        border: 1px solid white;
+        background-color: lightgrey;
         font-size: 20px;
     }
 
     button{
         padding: 5px 20px;
+        margin-right: 20px;
         border-radius: 10px;
-        border: 1px solid black;
+        border: 1px solid white;
+        background-color: lightgrey;
         cursor: pointer;
         font-size: 20px;
     }

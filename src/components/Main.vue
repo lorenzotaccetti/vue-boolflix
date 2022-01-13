@@ -1,47 +1,36 @@
 <template>
     <main>
-        <div>
-            <h2>
-                Risultati della ricerca per: {{text}}
-            </h2>
+        <div v-if="movies.length > 0 || tvseries.length > 0">
             <div>
                 <h2>
-                    Film:
+                    FILM
                 </h2>
             </div>
             <div 
-            v-if="movies.length > 0" 
             class="container">
                 <SingleCardCommon 
                 v-for="(element, index) in movies" 
                 :key="index" 
                 :element="element" />
             </div>
-            <div 
-            v-else class="no-result">
-                <h3>
-                    Nessun risultato
-                </h3>
-            </div>
-            <div>
+            <div class="serietv">
                 <h2>
-                    Serie TV:
+                    SERIE TV
                 </h2>
             </div>
-            <div 
-            v-if="tvseries.length > 0" 
+            <div  
             class="container">
                 <SingleCardCommon 
                 v-for="(element, index) in tvseries" 
                 :key="index" 
                 :element="element"/>
             </div>
-            <div 
-            v-else class="no-result">
-                <h3>
-                    Nessun risultato
-                </h3>
-            </div>
+        </div>
+        <div 
+        v-else class="no-result">
+            <h3>
+                Nessun risultato
+            </h3>
         </div>
     </main>
 </template>
@@ -65,6 +54,12 @@ export default {
 <style scoped lang="scss">
 main{
     height: calc(100% - 100px);
+    background-color: black;
+    color: white;
+
+    .serietv{
+        padding-top: 100px;
+    }
 
     h2{
         padding: 30px;
