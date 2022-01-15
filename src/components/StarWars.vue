@@ -183,24 +183,7 @@ import axios from 'axios';
 
                 // Funzione per trasformare il voto in decimali in voto in stelle
 
-                let vote = null;
-
-                if(this.starWarsDetails.vote_average > 8.5){
-                    vote = 5
-                    return vote;
-                } else if (this.starWarsDetails.vote_average > 6.5) {
-                    vote = 4
-                    return vote;
-                } else if (this.starWarsDetails.vote_average > 4.5) {
-                    vote = 3
-                    return vote;
-                } else if (this.starWarsDetails.vote_average > 2.5) {
-                    vote = 2
-                    return vote;
-                } else if (this.starWarsDetails.vote_average > 0.5) {
-                    vote = 1
-                    return vote;
-                }
+                let vote = Math.ceil(this.starWarsDetails.vote_average / 2);
 
                 return vote;
             },
@@ -211,16 +194,17 @@ import axios from 'axios';
 
 <style lang="scss" scoped>
 .single-card{
-    width: calc((100% / 1) - 20px);
+    width: calc((100% / 2) - 20px);
     margin: 10px;
     border: 1px solid white;
     border-radius: 10px;
     text-align: center;
     color: white;
-    // padding: 15px;
     flex-shrink: 0;
     cursor: pointer;
     overflow: hidden;
+    max-height: 400px;
+    overflow-y: auto;
 
     .front{
         display: block;
@@ -289,12 +273,12 @@ import axios from 'axios';
 };
 @media screen and (min-width: 992px){
     .single-card{
-        width: calc((100% / 4) - 20px)
+        width: calc((100% / 5) - 20px)
     }
 };
 @media screen and (min-width: 1200px){
     .single-card{
-        width: calc((100% / 6) - 20px)
+        width: calc((100% / 7) - 20px)
     }
 }
 </style>

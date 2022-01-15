@@ -114,11 +114,11 @@
                     <span class="bold">
                         Attori:
                     </span>
-                    <span
+                    <div
                     v-for="(elementTv, index) in actorsArrayTv"
                     :key="index">
                         {{elementTv.name}}
-                    </span>
+                    </div>
                 </div>
                 <div v-else>
                     <span class="bold">
@@ -288,24 +288,7 @@ export default {
 
             // Funzione per trasformare il voto in decimali in voto in stelle
 
-            let vote = null;
-
-            if(this.element.vote_average > 8.5){
-                vote = 5
-                return vote;
-            } else if (this.element.vote_average > 6.5) {
-                vote = 4
-                return vote;
-            } else if (this.element.vote_average > 4.5) {
-                vote = 3
-                return vote;
-            } else if (this.element.vote_average > 2.5) {
-                vote = 2
-                return vote;
-            } else if (this.element.vote_average > 0.5) {
-                vote = 1
-                return vote;
-            }
+            let vote = Math.ceil(this.element.vote_average / 2);
 
             return vote;
         },
@@ -315,7 +298,7 @@ export default {
 
 <style lang="scss" scoped>
 .single-card{
-    width: calc((100% / 1) - 20px);
+    width: calc((100% / 2) - 20px);
     margin: 10px;
     border: 1px solid white;
     border-radius: 10px;
@@ -325,6 +308,8 @@ export default {
     cursor: pointer;
     overflow: hidden;
     font-weight: 200;
+    max-height: 400px;
+    overflow-y: auto;
 
     .front{
         display: block;
@@ -394,12 +379,12 @@ export default {
 };
 @media screen and (min-width: 992px){
     .single-card{
-        width: calc((100% / 4) - 20px)
+        width: calc((100% / 5) - 20px)
     }
 };
 @media screen and (min-width: 1200px){
     .single-card{
-        width: calc((100% / 6) - 20px)
+        width: calc((100% / 7) - 20px)
     }
 }
 </style>
